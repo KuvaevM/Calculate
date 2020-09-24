@@ -2,13 +2,14 @@ def pow(a, n):
     if n == 1:
         return a
     if n % 2 == 1:
-        return pow(n / 2) * pow(n / 2) * a
+        return pow(a, (int)(n / 2)) * pow(a, (int)(n / 2)) * a
     else:
-        return pow(n / 2) * pow(n / 2)
+        return pow(a, (int)(n / 2)) * pow(a, (int)(n / 2))
 
 class Calculator:
     def __init__(self, init_value=0):
         self.value = init_value
+        self.accuracy = 0.0000001
 
     def add(self, *args):
         self.value += sum(args)
@@ -42,7 +43,27 @@ class Calculator:
             return self.auxiliary_power((int)(n / 2)) * self.auxiliary_power((int)(n / 2)) * self.value
         else:
             return self.auxiliary_power((int)(n / 2)) * self.auxiliary_power((int)(n / 2))
-
+    def root(self, n):
+        left_value = 0
+        if self.value>1:
+            right_value = self.value
+        elif self.value<1:
+            right_value = 1
+        else:
+            self.value = 1
+            return self
+        length_fractional = 0
+        while self.value-pow(left_value, n)>self.accuracy:
+            middle_value = (left_value+right_value)/2
+            if pow(middle_value, n)>self.value:
+                right_value = middle_value
+            elif pow(middle_value, n)<self.value:
+                left_value = middle_value
+            else:
+                self.value = middle_value
+                return self
+        self.value = left_value
+        return self
 
     def __repr__(self):
         return self.value
@@ -61,3 +82,4 @@ if __name__ == '__main__':
     print(Calculator(123).value - Calculator(14).value)
     print(Calculator(14).value / Calculator(2).value)
     print(Calculator(2).power(10))
+    print(Calculator(2).root(2))
