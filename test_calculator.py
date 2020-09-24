@@ -6,6 +6,8 @@ from simple_calculator import Calculator
 
 class TestCalculator(unittest.TestCase):
     def setUp(self):
+        constanta = random.randint(1,1000)
+        value = random.random()*constanta
         self.calculator = Calculator(2)
 
     def test_add(self):
