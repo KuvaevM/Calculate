@@ -81,5 +81,5 @@ if __name__ == '__main__':
     print(10 + Calculator(12).value)
     print(Calculator(123).value - Calculator(14).value)
     print(Calculator(14).value / Calculator(2).value)
-    print(Calculator(2).power(10))
+    print(Calculator(2).power(1))
     print(Calculator(2).root(2))
